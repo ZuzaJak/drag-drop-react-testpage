@@ -6,7 +6,7 @@ import './style.css';
 import fox_image from './img/fox.svg';
 
 const DragDrop = () => {
-  const [color, setColor] = useState('blue');
+  const [color, setColor] = useState('white');
   const handleColorClick = (event) => {
     setColor(event.target.id);
   };
