@@ -1,0 +1,72 @@
+body {
+  background: linear-gradient(90deg, #f7971e, #fde807 100%);
+  background-attachment: fixed;
+  color: azure;
+  min-height: 100vh;
+
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+p {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 30px;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.options {
+  display: flex;
+}
+.drag-blue,
+.drag-red,
+.drag-green {
+  border-radius: 5px;
+  padding: 5px;
+  height: 50px;
+  margin: 20px;
+  color: white;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.drag-blue {
+  background-color: #0000ff;
+}
+.drag-red {
+  background-color: #ff0000;
+}
+.drag-green {
+  background-color: green;
+}
+.fox__image {
+  width: 70%;
+  max-width: 600px;
+  border: 1px solid gainsboro;
+  background-color: wheat;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+h3 {
+  margin: 0 0 20px 0;
+}
+.reload {
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* fox */
+.fox {
+  width: 70%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(rgba(233, 113, 14, 0.4), rgba(235, 21, 21, 0.3));
+}
