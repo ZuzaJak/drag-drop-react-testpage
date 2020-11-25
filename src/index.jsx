@@ -1,62 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
-import { useState } from 'react';
-import './index.html';
 import './style.css';
-import fox_image from './img/fox.svg';
+import './index.html';
+import fox_flowers from './img/fox.svg';
 
-const DragDrop = () => {
-  const [color, setColor] = useState('white');
-  const handleColorClick = (event) => {
-    setColor(event.target.id);
+const App = () => {
+  const [color, setColor] = useState(null);
+  const [usedColors, setUsedColors] = useState({});
+
+  const drag = (event) => {
+    event.dataTransfer.setData('color', event.target.classList[1]);
   };
+
+  const drop = (event) => {
+    const newColor = event.dataTransfer.getData('color');
+    setUsedColors({ ...usedColors, [newColor]: true });
+    setColor(newColor);
+  };
+
+  const allowDrop = (event) => {
+    event.preventDefault();
+  };
+
+  const reload = (event) => {
+    event.preventDefault();
+    location.reload();
+  };
+
   return (
-    <div className="fox" id="fox">
-      <p id="hura">
-        Úkol: Obarvi pozadí za liškou ZELENĚ - přetáhni jeden z obdélníčků na
-        obrázek.
+    <>
+      <p>
+        {!color ? (
+          'Úkol: Obarvi pozadí za liškou ZELENĚ (přetáhni jeden z obdélníčků na obrázek).'
+        ) : color === 'green' ? (
+          'Hurá! Povedlo se ti to 😊'
+        ) : (
+          <a className="reload" href="#" onClick={reload}>
+            Zelenou jsi netrefil/a, klikni tady pro další pokus!
+          </a>
+        )}
       </p>
       <div className="container">
         <div className="options">
-          <button
-            className="drag-blue"
-            id="blue"
-            onClick={handleColorClick}
-            draggable="true"
-            /*         onDragStart="drag(event)" */
-          >
-            background-color: blue
-          </button>
-          <button
-            className="drag-red"
-            id="red"
-            onClick={handleColorClick}
-            draggable="true"
-            /*   onDragStart="drag(event)" */
-          >
-            background-color: red
-          </button>
-          <button
-            className="drag-green"
-            id="green"
-            onClick={handleColorClick}
-            draggable="true"
-            /*  onDragStart="drag(event)" */
-          >
-            background-color: green
-          </button>
+          {!usedColors?.blue && (
+            <div className="drag blue" draggable onDragStart={drag}>
+              {'{background-color: blue}'}
+            </div>
+          )}
+          {!usedColors?.red && (
+            <div className="drag red" draggable onDragStart={drag}>
+              {'{background-color: red}'}
+            </div>
+          )}
+          {!usedColors?.green && (
+            <div className="drag green" draggable onDragStart={drag}>
+              {'{background-color: green}'}
+            </div>
+          )}
         </div>
 
         <img
-          src={fox_image}
-          alt="liška"
-          className="fox__image"
-          id="div2"
-          style={{ backgroundColor: `${color}` }}
+          src={fox_flowers}
+          alt="Fox Flowers"
+          className={`image ${!!color ? color : ''}`}
+          onDrop={drop}
+          onDragOver={allowDrop}
         />
       </div>
-    </div>
+    </>
   );
 };
-
-render(<DragDrop />, document.querySelector('#app'));
+render(<App />, document.querySelector('#app'));
